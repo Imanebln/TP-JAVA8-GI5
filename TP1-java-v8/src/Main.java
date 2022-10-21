@@ -2,6 +2,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.*;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -21,7 +23,7 @@ public class Main {
         listStrings2.add("ENSA");
         listStrings2.add("EST");
 
-        System.out.println(listStrings2.stream().collect(Collectors.joining(", ")));
+        System.out.println(listStrings2.stream().collect(joining(", ")));
 
         //Question 3
         System.out.println("Question3");
@@ -30,7 +32,7 @@ public class Main {
         listStrings3.add("ENSAO");
         listStrings3.add("EST");
 
-        listStrings3.stream().collect(Collectors.toSet()).forEach(System.out::println);
+        listStrings3.stream().distinct().forEach(System.out::println);
 
         //Question 4
         System.out.println("Question4");
@@ -39,7 +41,7 @@ public class Main {
         listStrings4.add("ENSA");
         listStrings4.add("EST");
 
-        System.out.println(listStrings4.stream().anyMatch(s -> s.contains("ENSA")));
+        System.out.println("Matches? " + listStrings4.stream().anyMatch(s -> s.contains("ENSA")));
 
         //Question 5
         System.out.println("Question5");
@@ -61,13 +63,17 @@ public class Main {
         Collections.sort(people);
         people.stream().map(Person::getName).forEach(System.out::println);
 
+        //Question 7
+        System.out.println("Question7");
         List<Person> people2 = Arrays.asList(new Person("Chahid", 21),
                 new Person("Boulouane", 23),
+                new Person("Bouchentouf", 22),
+                new Person("Alouche", 23),
                 new Person("Benziza", 22));
 
         people2
                 .stream()
-                .collect(Collectors.groupingBy(Person::getAge,Collectors.mapping(Person::getName,Collectors.toList())))
+                .collect(groupingBy(Person::getAge,mapping(Person::getName,toList())))
                 .forEach((key, value) -> {System.out.println(key + " = " + value);});
     }
 }
